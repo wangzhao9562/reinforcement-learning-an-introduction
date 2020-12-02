@@ -208,6 +208,7 @@ class Player:
                 self.estimations[hash_val] = 0.5
 
     # update value estimation
+    # V(s)<-V(s)+α*(V(s+1)-V(s))
     def backup(self):
         states = [state.hash() for state in self.states]
 
@@ -313,14 +314,19 @@ def compete(turns):
     player2.load_policy()
     player1_win = 0.0
     player2_win = 0.0
+    # add the counter for tie turns
+    tie_cnt = 0.0
     for _ in range(turns):
         winner = judger.play()
         if winner == 1:
             player1_win += 1
         if winner == -1:
             player2_win += 1
+        # add the counter for tie turns
+        if winner == 0:
+            tie_cnt += 1
         judger.reset()
-    print('%d turns, player 1 win %.02f, player 2 win %.02f' % (turns, player1_win / turns, player2_win / turns))
+    print('%d turns, player 1 win %.02f, player 2 win %.02f, tie turns %d' % (turns, player1_win / turns, player2_win / turns, tie_cnt))
 
 
 # The game is a zero sum game. If both players are playing with an optimal strategy, every game will end in a tie.
