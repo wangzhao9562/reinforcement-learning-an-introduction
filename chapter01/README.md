@@ -64,7 +64,7 @@ Player：
 winner与拷贝的symbol相同，设置以该哈希值对应的estimations字典值为1.0，若winner为0（平局），设置为0.5，  
 否则设置为0，若结束标识为False，设置为0.5  
   backup：提取State列表中所有State对象的哈希值为新的列表，反序遍历State哈希值列表，计算相邻两个状态在价值  
-表（estimation字典）中的差值，并更新到对应状态中V(s) = V(s) + α(V(s+1) - V(s+1))  
+表（estimation字典）中的差值，并更新到对应状态中V(s) = V(s) + α(V(s+1) - V(s))  
   act: 提取State列表中最后一个State对象，创建next_state列表及next_position列表，遍历棋盘，该状态下遍历到的  
 位置所标示的值为0，添加该位置到next_positions中，next_state列表添加在该位置落子后的State哈希值，执行随机过程  
 。若产生的随机数小于设置阈值，从next_positions中随机选择一个位置作为下一步落子位置，并将持有的Symbol加入到  
